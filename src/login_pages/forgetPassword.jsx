@@ -25,11 +25,12 @@ function ForgetPassword() {
           <input type="email" placeholder="email@example.com" />
 
 
-          <button type="submit" className="login-button">Send Reset Link</button>
+          
+          <Link to="/reset"><button type="submit" className="login-button" >Send Reset Link</button></Link>
         </form>
         
 
-        <Link to="/reset">Reset Password</Link>
+        
 
     
       </div>

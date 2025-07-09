@@ -22,6 +22,7 @@ body {
 
 .logo {
   font-size: 24px;
+  font-family: serif;
   margin-bottom: 16px;
   color: #3b82f6;
   font-weight: bold;
@@ -35,11 +36,14 @@ body {
 h2 {
   margin: 0;
   font-size: 22px;
+  font-weight: bold;
 }
 
 .subtitle {
   color: #888;
   margin-bottom: 24px;
+  margin-top: 5px;
+  font-size: 12px;
 }
 
 form {
@@ -47,7 +51,7 @@ form {
 }
 
 label {
-  font-size: 14px;
+  font-size: 12px;
   font-weight: 500;
   margin-top: 10px;
   display: block;
@@ -61,6 +65,7 @@ input {
   border: 1px solid #ccc;
   border-radius: 6px;
   box-sizing: border-box;
+  font-size: 12px;
 }
 
 .password-label {
@@ -70,9 +75,12 @@ input {
 }
 
 .forgot {
-  font-size: 12px;
+  font-size: 10px;
   color: #3b82f6;
   text-decoration: none;
+  color: #888;
+  text-decoration: underline;
+
 }
 
 .login-button {
@@ -80,42 +88,17 @@ input {
   padding: 10px;
   background-color: #3b82f6;
   color: white;
-  font-weight: bold;
   border: none;
   border-radius: 6px;
   margin-top: 10px;
   cursor: pointer;
+  font-size: 14px;
 }
 
 .login-button:hover {
   background-color: #2563eb;
 }
 
-.divider {
-  text-align: center;
-  margin: 20px 0;
-  color: #999;
-  font-size: 14px;
-  position: relative;
-}
-
-.divider::before,
-.divider::after {
-  content: "";
-  position: absolute;
-  top: 50%;
-  width: 45%;
-  height: 1px;
-  background: #ddd;
-}
-
-.divider::before {
-  left: 0;
-}
-
-.divider::after {
-  right: 0;
-}
 
 .google-login {
   width: 100%;
@@ -136,12 +119,16 @@ input {
 
 .signup-text {
   margin-top: 20px;
-  font-size: 14px;
-  color: #444;
+  font-size: 12px;
+  color: #888;
 }
 
 .signup-text a {
-  color: #3b82f6;
   text-decoration: none;
-  font-weight: bold;
+  color: black;
+  font-size: 12px;
+}
+
+hr{
+    opacity: 0.3;
 }

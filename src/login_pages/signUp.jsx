@@ -28,10 +28,10 @@ function SignUp() {
           </label>
           <input type="password" />
 
-          <button type="submit" className="login-button">Sign Up</button>
+          <button type="submit" className="login-button">Sign up</button>
         </form>
         <hr />
-        <div ><span>Or log in with:</span></div>
+        <div ><span className="subtitle">Or log in with:</span></div>
         <br />
 
         <button className="google-login">

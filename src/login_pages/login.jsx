@@ -25,14 +25,14 @@ function Login() {
 
           <label className="password-label">
             Password
-            <Link to="/forgot">Forgot</Link>
+            <Link to="/forgot" className='forgot'>Forgot</Link>
           </label>
           <input type="password"  />
 
           <button type="submit" className="login-button">Login</button>
         </form>
         <hr />
-        <div ><span>Or log in with:</span></div>
+        <div ><span className="subtitle">Or log in with:</span></div>
         <br />
 
         <button className="google-login">
