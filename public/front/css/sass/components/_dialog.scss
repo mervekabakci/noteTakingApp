@@ -1,0 +1,35 @@
+dialog {
+  max-width: 800px;
+  width: 100%;
+  border: none;
+  border-radius: 20px;
+  border: 1px dotted var(--secondary);
+
+  .dialogHead{
+    display: flex;
+    align-items: center;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--gray-100);
+
+    .closeBtn{
+        margin-left: auto;
+        font-size: 20px;
+        color: var(--text);
+        transition: all .3s linear;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        @media screen and (min-width:992px) {
+            &:hover{
+                color: var(--secondary);
+                transform: rotate(90deg);
+            }
+        }
+    }
+  }
+
+  .dialogBody{
+    padding: 30px;
+  }
+}
