@@ -18,6 +18,7 @@ function Login() {
       <form>
         <p><input type="text" placeholder='ad' /></p>
         <p><input type="text" placeholder='soyad' /></p>
+        <p><input type="email" placeholder='e-posta' /></p>
         <button>Giriş</button>
       </form>
     </>
