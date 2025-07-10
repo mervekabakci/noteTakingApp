@@ -1,9 +1,9 @@
 import './App.css'
-import LoginApp from './login_pages/login'
+import LoginApp from './pages/auth/login'
 import { BrowserRouter as Router,Routes,Route } from 'react-router-dom';
-import SignUpPageApp from './login_pages/signUp';
-import ForgetPasswordPageApp from './login_pages/forgetPassword';
-import ResetPasswordPageApp from './login_pages/resetPassword';
+import SignUpPageApp from './pages/auth/signUp';
+import ForgetPasswordPageApp from './pages/auth/forgetPassword';
+import ResetPasswordPageApp from './pages/auth/resetPassword';
 
 export default function App() {
 

@@ -1,23 +1,22 @@
-import '../App.css';
-import { Link } from 'react-router-dom';
 
-export default function LoginApp() {
+
+export default function SignUpPageApp() {
 
   return (
     <>
-      <Login />
+      <SignUp />
     </>
   )
 }
 
-function Login() {
+function SignUp() {
   return (
     <>
       <div className="login-container">
       <div className="login-card">
         <div className="logo">🖊️ <span>Notes</span></div>
-        <h2>Welcome to Note</h2>
-        <p className="subtitle">Please log in to continue</p>
+        <h2>Create Your Account</h2>
+        <p className="subtitle">Sign up to start organizing your notes and boost your productivity.</p>
 
         <form>
           <label>Email Address</label>
@@ -25,11 +24,11 @@ function Login() {
 
           <label className="password-label">
             Password
-            <Link to="/forgot" className='forgot'>Forgot</Link>
+            
           </label>
-          <input type="password"  />
+          <input type="password" />
 
-          <button type="submit" className="login-button">Login</button>
+          <button type="submit" className="login-button">Sign up</button>
         </form>
         <hr />
         <div ><span className="subtitle">Or log in with:</span></div>
@@ -42,7 +41,9 @@ function Login() {
         <br />
         <hr />
 
-        <p className="signup-text">No account yet? <Link to="/signup">Sign Up</Link></p>
+        <p className="signup-text">Already have an account?<a href="/">Login</a></p>
+
+    
       </div>
     </div>
     </>
