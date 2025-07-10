@@ -1,26 +1,48 @@
 import './App.css'
+import { useRef, useState } from 'react';
+import { BrowserRouter as Router,Routes,Route } from 'react-router-dom';
+
+import LoginApp from './pages/auth/login'
+import SignUpPageApp from './pages/auth/signUp';
+import ForgetPasswordPageApp from './pages/auth/forgetPassword';
+import ResetPasswordPageApp from './pages/auth/resetPassword';
+import DialogApp from './DialogApp';
 
 export default function App() {
+  const [count, setCount] = useState(0);
+  const otherCount = useRef(0);
 
-  return (
+  function handleClick() {
+    setCount(count + 1);
+  }
+
+  function handleOtherClick() {
+    if (otherCount.current >= 10) {
+      alert('Çok tıkladın yeter');
+      return;
+    }
+  
+
+    otherCount.current++;
+    console.log(otherCount.current);
+  
+  }
+  return(
     <>
-      <h1>Note Taking</h1>
-      <button className='fixBtn button-secondary'>Gonder</button>
 
-      <Login />
+  
+      <DialogApp />
+
+      <Router>
+      <Routes>
+        <Route path="/" element={<LoginApp />} />
+        <Route path="/signup" element={<SignUpPageApp />} />
+        <Route path="/forgot" element={<ForgetPasswordPageApp />} />
+        <Route path="/reset" element={<ResetPasswordPageApp />} />
+      </Routes>
+    </Router>
+
     </>
   )
 }
 
-function Login() {
-  return (
-    <>
-      <form>
-        <p><input type="text" placeholder='ad' /></p>
-        <p><input type="text" placeholder='soyad' /></p>
-        <p><input type="email" placeholder='e-posta' /></p>
-        <button>Giriş</button>
-      </form>
-    </>
-  )
-}
