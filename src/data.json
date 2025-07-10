@@ -1,0 +1,225 @@
+{
+  "user": {
+    "id": "u001",
+    "name": "Jane Developer",
+    "email": "jane@example.com"
+  },
+  "notes": [
+    {
+      "id": "n1",
+      "title": "React Performance Optimization",
+      "tags": ["Dev", "React"],
+      "content": "Key techniques for improving React app performance.",
+      "sections": [
+        {
+          "title": "Code Splitting",
+          "items": ["Use React.lazy()", "Use dynamic imports"]
+        },
+        {
+          "title": "Memoization",
+          "items": ["useMemo", "useCallback", "React.memo"]
+        }
+      ],
+      "todo": "Benchmark application",
+      "createdAt": "2024-10-29T10:00:00Z",
+      "updatedAt": "2024-11-01T12:00:00Z",
+      "archived": false
+    },
+    {
+      "id": "n2",
+      "title": "Japan Travel Planning",
+      "tags": ["Travel", "Personal"],
+      "content": "Planning a trip to Japan with stops in Tokyo, Kyoto, and Osaka.",
+      "sections": [],
+      "todo": "Book flights",
+      "createdAt": "2024-10-28T09:30:00Z",
+      "updatedAt": "2024-10-30T08:00:00Z",
+      "archived": false
+    },
+    {
+      "id": "n3",
+      "title": "Favorite Pasta Recipes",
+      "tags": ["Cooking", "Recipes"],
+      "content": "List of favorite pasta recipes including carbonara and bolognese.",
+      "sections": [
+        {
+          "title": "Carbonara",
+          "items": ["Eggs", "Pancetta", "Parmesan", "Spaghetti"]
+        },
+        {
+          "title": "Bolognese",
+          "items": ["Ground beef", "Tomatoes", "Onion", "Garlic"]
+        }
+      ],
+      "todo": "",
+      "createdAt": "2024-10-27T14:15:00Z",
+      "updatedAt": "2024-10-27T15:00:00Z",
+      "archived": false
+    },
+    {
+      "id": "n4",
+      "title": "Weekly Workout Plan",
+      "tags": ["Fitness", "Health"],
+      "content": "Workout schedule for the week with cardio and strength focus.",
+      "sections": [],
+      "todo": "Add stretching routine",
+      "createdAt": "2024-10-25T10:00:00Z",
+      "updatedAt": "2024-10-26T11:30:00Z",
+      "archived": false
+    },
+    {
+      "id": "n5",
+      "title": "Reading List",
+      "tags": ["Books", "Personal"],
+      "content": "Books I plan to read this month.",
+      "sections": [
+        {
+          "title": "Fiction",
+          "items": ["The Midnight Library", "Project Hail Mary"]
+        },
+        {
+          "title": "Non-Fiction",
+          "items": ["Atomic Habits", "Sapiens"]
+        }
+      ],
+      "todo": "Buy new bookmarks",
+      "createdAt": "2024-10-05T17:00:00Z",
+      "updatedAt": "2024-10-10T09:45:00Z",
+      "archived": false
+    },
+    {
+      "id": "n6",
+      "title": "Shopping List",
+      "tags": ["Shopping"],
+      "content": "Weekly groceries and household items.",
+      "sections": [],
+      "todo": "Check fridge for leftovers",
+      "createdAt": "2024-10-31T08:00:00Z",
+      "updatedAt": "2024-11-01T08:15:00Z",
+      "archived": true
+    },
+    {
+      "id": "n7",
+      "title": "Meal Prep Ideas",
+      "tags": ["Health", "Cooking"],
+      "content": "Ideas for preparing healthy meals in advance.",
+      "sections": [
+        {
+          "title": "Lunches",
+          "items": ["Chicken bowls", "Quinoa salad"]
+        },
+        {
+          "title": "Snacks",
+          "items": ["Greek yogurt", "Almonds"]
+        }
+      ],
+      "todo": "",
+      "createdAt": "2024-10-12T09:00:00Z",
+      "updatedAt": "2024-10-13T10:00:00Z",
+      "archived": false
+    },
+    {
+      "id": "n8",
+      "title": "TypeScript Basics",
+      "tags": ["Dev", "TypeScript"],
+      "content": "Notes on TypeScript types, interfaces, and generics.",
+      "sections": [],
+      "todo": "Add utility types section",
+      "createdAt": "2024-09-30T11:00:00Z",
+      "updatedAt": "2024-10-02T11:00:00Z",
+      "archived": false
+    },
+    {
+      "id": "n9",
+      "title": "UI Design Checklist",
+      "tags": ["Design", "Dev"],
+      "content": "Checklist for finalizing UI before production release.",
+      "sections": [
+        {
+          "title": "Checklist",
+          "items": [
+            "Responsive layout",
+            "Accessibility",
+            "Consistent spacing",
+            "Color contrast"
+          ]
+        }
+      ],
+      "todo": "",
+      "createdAt": "2024-10-10T10:00:00Z",
+      "updatedAt": "2024-10-15T13:00:00Z",
+      "archived": false
+    },
+    {
+      "id": "n10",
+      "title": "Holiday Gift Ideas",
+      "tags": ["Personal", "Shopping"],
+      "content": "Gift ideas for family and friends for the holidays.",
+      "sections": [],
+      "todo": "Create budget",
+      "createdAt": "2024-11-01T16:00:00Z",
+      "updatedAt": "2024-11-01T16:00:00Z",
+      "archived": false
+    },
+    {
+      "id": "n11",
+      "title": "Work Notes - Q4 Planning",
+      "tags": ["Work", "Dev"],
+      "content": "Brainstorming and project planning for Q4 OKRs.",
+      "sections": [],
+      "todo": "",
+      "createdAt": "2024-09-28T14:00:00Z",
+      "updatedAt": "2024-09-30T14:30:00Z",
+      "archived": true
+    },
+    {
+      "id": "n12",
+      "title": "Home Improvement Projects",
+      "tags": ["Personal", "Projects"],
+      "content": "Ideas and quotes for renovating the kitchen and bathroom.",
+      "sections": [],
+      "todo": "Compare contractors",
+      "createdAt": "2024-10-15T08:30:00Z",
+      "updatedAt": "2024-10-20T10:45:00Z",
+      "archived": false
+    },
+    {
+      "id": "n13",
+      "title": "Meditation Techniques",
+      "tags": ["Health", "Mindfulness"],
+      "content": "Different techniques to try for daily meditation.",
+      "sections": [
+        {
+          "title": "Types",
+          "items": ["Guided", "Body Scan", "Breath Focus"]
+        }
+      ],
+      "todo": "Try body scan before sleep",
+      "createdAt": "2024-10-03T07:00:00Z",
+      "updatedAt": "2024-10-04T08:00:00Z",
+      "archived": false
+    },
+    {
+      "id": "n14",
+      "title": "Blog Post Ideas",
+      "tags": ["Writing", "Dev"],
+      "content": "List of blog post topics to write this quarter.",
+      "sections": [],
+      "todo": "Schedule writing time",
+      "createdAt": "2024-09-18T15:00:00Z",
+      "updatedAt": "2024-09-20T09:00:00Z",
+      "archived": false
+    },
+    {
+      "id": "n15",
+      "title": "Fitness Goals 2025",
+      "tags": ["Fitness", "Health"],
+      "content": "Long-term health and fitness goals for 2025.",
+      "sections": [],
+      "todo": "Track monthly progress",
+      "createdAt": "2024-09-22T12:00:00Z",
+      "updatedAt": "2024-10-01T14:00:00Z",
+      "archived": false
+    }
+  ]
+}

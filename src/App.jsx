@@ -1,9 +1,12 @@
 import './App.css'
-import LoginApp from './pages/auth/login'
+import { useRef, useState } from 'react';
 import { BrowserRouter as Router,Routes,Route } from 'react-router-dom';
+
+import LoginApp from './pages/auth/login'
 import SignUpPageApp from './pages/auth/signUp';
 import ForgetPasswordPageApp from './pages/auth/forgetPassword';
 import ResetPasswordPageApp from './pages/auth/resetPassword';
+import DialogApp from './DialogApp';
 
 export default function App() {
   const [count, setCount] = useState(0);
