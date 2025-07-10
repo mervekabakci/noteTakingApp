@@ -1,26 +1,23 @@
 import './App.css'
+import LoginApp from './pages/auth/login'
+import { BrowserRouter as Router,Routes,Route } from 'react-router-dom';
+import SignUpPageApp from './pages/auth/signUp';
+import ForgetPasswordPageApp from './pages/auth/forgetPassword';
+import ResetPasswordPageApp from './pages/auth/resetPassword';
 
 export default function App() {
 
   return (
     <>
-      <h1>Note Taking</h1>
-      <button className='fixBtn button-secondary'>Gonder</button>
-
-      <Login />
+      <Router>
+      <Routes>
+        <Route path="/" element={<LoginApp />} />
+        <Route path="/signup" element={<SignUpPageApp />} />
+        <Route path="/forgot" element={<ForgetPasswordPageApp />} />
+        <Route path="/reset" element={<ResetPasswordPageApp />} />
+      </Routes>
+    </Router>
     </>
   )
 }
 
-function Login() {
-  return (
-    <>
-      <form>
-        <p><input type="text" placeholder='ad' /></p>
-        <p><input type="text" placeholder='soyad' /></p>
-        <p><input type="email" placeholder='e-posta' /></p>
-        <button>Giriş</button>
-      </form>
-    </>
-  )
-}
