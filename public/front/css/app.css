@@ -3995,35 +3995,179 @@ h1 {
 }
 
 dialog {
-  max-width: 800px;
+  max-width: 480px;
   width: 100%;
-  border: none;
+  border: 1px solid #ccc;
   border-radius: 20px;
-  border: 1px dotted var(--secondary);
+  background: white;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+  font-family: sans-serif;
 }
-dialog .dialogHead {
+
+.dialogHead {
   display: flex;
   align-items: center;
-  padding: 10px 0;
-  border-bottom: 1px solid var(--gray-100);
+  justify-content: space-between;
+  padding: 16px 24px;
+  border-bottom: 1px solid #eee;
+  font-size: 18px;
+  font-weight: bold;
 }
-dialog .dialogHead .closeBtn {
+
+.closeBtn {
+  font-size: 20px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.closeBtn:hover {
+  transform: rotate(90deg);
+  color: #999;
+}
+
+.dialogBody {
+  padding: 24px;
+}
+
+.dialogBody p {
+  font-size: 16px;
+  color: #444;
+  margin-bottom: 20px;
+}
+
+.dialogActions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+}
+
+.cancelBtn,
+.confirmBtn {
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  border: none;
+  transition: all 0.2s ease-in-out;
+}
+
+.cancelBtn {
+  background-color: #f1f1f1;
+  color: #333;
+}
+
+.cancelBtn:hover {
+  background-color: #ddd;
+}
+
+.confirmBtn.delete {
+  background-color: #dc3545;
+  color: white;
+}
+
+.confirmBtn.delete:hover {
+  background-color: #b02a37;
+}
+
+.confirmBtn.archive {
+  background-color: #007bff;
+  color: white;
+}
+
+.confirmBtn.archive:hover {
+  background-color: #0056b3;
+}
+
+dialog {
+  max-width: 480px;
+  width: 100%;
+  border: 1px solid #ccc;
+  border-radius: 20px;
+  background: white;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+  font-family: sans-serif;
+}
+
+.dialogHead {
+  display: flex;
+  align-items: center;
+  padding: 16px 24px;
+  border-bottom: 1px solid #eee;
+  font-size: 18px;
+  font-weight: bold;
+  color: #333;
+}
+
+.closeBtn {
   margin-left: auto;
   font-size: 20px;
-  color: var(--text);
-  transition: all 0.3s linear;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.closeBtn:hover {
+  transform: rotate(90deg);
+  color: #999;
+}
+
+.dialogBody {
+  padding: 24px;
+}
+
+.dialogBody p {
+  font-size: 16px;
+  color: #444;
+  margin-bottom: 20px;
+}
+
+.dialogActions {
   display: flex;
-  align-items: center;
-  justify-content: center;
+  justify-content: flex-end;
+  gap: 12px;
 }
-@media screen and (min-width: 992px) {
-  dialog .dialogHead .closeBtn:hover {
-    color: var(--secondary);
-    transform: rotate(90deg);
-  }
+
+.cancelBtn,
+.confirmBtn {
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  border: none;
+  transition: all 0.2s ease-in-out;
 }
-dialog .dialogBody {
-  padding: 30px;
+
+/* Cancel (Gri) */
+.cancelBtn {
+  background-color: #f1f1f1;
+  color: #333;
+}
+
+.cancelBtn:hover {
+  background-color: #ddd;
+}
+
+/* Delete (Kırmızı) */
+.confirmBtn.delete {
+  background-color: #dc3545;
+  color: white;
+}
+
+.confirmBtn.delete:hover {
+  background-color: #b02a37;
+}
+
+/* Archive (Mavi) */
+.confirmBtn.archive {
+  background-color: #007bff;
+  color: white;
+}
+
+.confirmBtn.archive:hover {
+  background-color: #0056b3;
 }
 
 button {
@@ -4220,4 +4364,4 @@ button {
     padding-left: 16px;
     padding-right: 16px;
   }
-}
+}/*# sourceMappingURL=app.css.map */

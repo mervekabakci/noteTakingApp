@@ -1,11 +1,32 @@
-import './App.css'
+
+import { useRef, useState } from 'react';
+import './App.css';
+import DialogApp from './DialogApp';
 
 export default function App() {
+  const [count, setCount] = useState(0);
+  const otherCount = useRef(0);
 
-  return (
+  function handleClick() {
+    setCount(count + 1);
+  }
+
+  function handleOtherClick() {
+    if (otherCount.current >= 10) {
+      alert('Çok tıkladın yeter');
+      return;
+    }
+  
+
+    otherCount.current++;
+    console.log(otherCount.current);
+  
+  }
+  return(
     <>
-      <h1>Note Taking</h1>
-      <button className='fixBtn button-secondary'>Gonder</button>
+  
+      <DialogApp />
     </>
   )
 }
+
