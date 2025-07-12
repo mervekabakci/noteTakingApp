@@ -3,22 +3,17 @@
 :root {
   --white: #ffffff;
   --black: #000000;
-  --primary: #242424;
-  --secondary: #f3213c;
-  --tertiary: #201e94;
-  --bg-color: #ecf0f5;
-  --text: #383737;
+  --primary: #335cff;
+  --secondary: #525866;
+  --danger: #fb3748;
+  --light-bg: #e5e5e5;
+  --dark-bg: #06090c;
 
-  --gray: #ecf0f5;
-  --gray-100: #e3e6eb;
-  --gray-200: #cecfd1;
-  --gray-300: #bebebe;
-  --gray-400: #b1b0b0;
-  --gray-500: #a09e9e;
-  --gray-600: #929191;
-  --gray-700: #777777;
-  --gray-800: #6b6b6b;
-  --gray-900: #5c5b5b;
+  --gray-100: #f3f5f8;
+  --gray-200: #e0e4ea;
+  --gray-500: #717784;
+  --gray-600: #525866;
+  --gray-950: #0e121b;
 }
 
 $gutter: 1rem;
@@ -26,34 +21,30 @@ $gutter: 1rem;
 /*burada tanımlanan renkler class olarak kullanabılırız*/
 $primary: var(--primary);
 $secondary: var(--secondary);
-$tertiary: var(--tertiary);
+$danger: var(--danger);
+$light-bg: var(--light-bg);
+$dark-bg: var(--dark-bg);
 $white: var(--white);
 $black: var(--black);
 $gray-100: var(--gray-100);
 $gray-200: var(--gray-200);
-$gray-300: var(--gray-300);
-$gray-400: var(--gray-400);
 $gray-500: var(--gray-500);
 $gray-600: var(--gray-600);
-$gray-700: var(--gray-700);
-$gray-800: var(--gray-800);
-$gray-900: var(--gray-900);
+$gray-950: var(--gray-950);
 
 $colors: (
   "primary": $primary,
   "secondary": $secondary,
-  "tertiary": $tertiary,
+  "danger": $danger,
+  "light-bg": $light-bg,
+  "dark-bg": $dark-bg,
   "white": $white,
   "black": $black,
   "gray-100": $gray-100,
   "gray-200": $gray-200,
-  "gray-300": $gray-300,
-  "gray-400": $gray-400,
   "gray-500": $gray-500,
   "gray-600": $gray-600,
-  "gray-700": $gray-700,
-  "gray-800": $gray-800,
-  "gray-900": $gray-900,
+  "gray-950": $gray-950,
 );
 
 //bg-primary seklınde burada tanımlanan renklerı kullanarak bg rengını class ıle degıstırebılır
@@ -81,35 +72,23 @@ $colors: (
 
           @media screen and (min-width: 992px) {
             &:hover {
-              color: $color !important;
+              color: $white !important;
+              background-color: $color;
             }
           }
 
           @if $name == "white" {
             color: $primary !important;
-
-            &:after {
-              background-color: $primary !important;
-            }
           } @else {
             color: $white !important;
-
-            &:after {
-              background-color: $white !important;
-            }
           }
         }
 
         &-outline {
           &:not(.disabled) {
-            background-color: rgba(0, 0, 0, 0) !important;
+            background-color: $gray-100 !important;
             color: $color !important;
-            border-color: $color !important;
-
-            &:after {
-              background-color: $color !important;
-            }
-
+            border-color: $gray-100 !important;
             @media screen and (min-width: 992px) {
               &:hover {
                 @if $name == "white" {
@@ -146,7 +125,7 @@ $colors: (
   @return map-get($breakpoints, $bp);
 }
 
-//ekran ölçü aralıklarının tanımlanması
+// Breakpoint ve container genişlikleri
 $breakpoints: (
   xs: 320px,
   sm: 576px,
@@ -158,60 +137,56 @@ $breakpoints: (
   big: 1920px,
 );
 
-@function container($container-size, $true-val: false) {
-  @return map-get($container-sizes, $container-size);
-}
-
-$container-sizes: (
-  xs: map-get($breakpoints, xs),
-  sm: map-get($breakpoints, sm),
-  md: map-get($breakpoints, md),
-  lg: map-get($breakpoints, lg),
-  xl: map-get($breakpoints, xl),
-  xxl: map-get($breakpoints, xxl),
-  xxxl: map-get($breakpoints, xxxl),
-  big: map-get($breakpoints, big),
+// Her breakpoint için container max-width değerleri
+$container-max-widths: (
+  xs: 284px,
+  sm: 540px,
+  md: 960,
+  lg: 1140px,
+  xl: 1320px,
+  xxl: 1440px,
+  xxxl: 1640px,
+  big: 1860px,
 );
 
+// Ana .container sınıfı (responsive)
 .container {
-  padding-left: 1rem;
-  padding-right: 1rem;
+  width: 100%;
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: auto;
+  margin-left: auto;
 
-  &:not(.is-fluid) {
-    margin: 0 auto;
-
-    @each $bp, $container-size in $container-sizes {
-      @include min(#{bp(#{$bp})}) {
-        width: 100%;
-        max-width: container(#{$bp});
-      }
+  // Her breakpoint'e göre max-width
+  @each $breakpoint, $container-max in $container-max-widths {
+    @media (min-width: map-get($breakpoints, $breakpoint)) {
+      max-width: $container-max;
     }
   }
 }
 
-@each $bp, $container-size in $container-sizes {
-  .container-#{$bp} {
-    margin: 0 auto;
-    padding-right: 30px;
-    padding-left: 30px;
+// Sabit genişlikli .container-{breakpoint} sınıfları
+@each $breakpoint, $container-max in $container-max-widths {
+  .container-#{$breakpoint} {
     width: 100%;
-
-    @media screen and (max-width: 991.98px) {
-      padding-left: 16px;
-      padding-right: 16px;
-    }
-
-    $i: index($container-sizes, $bp $container-size);
-
-    @for $j from $i through length($container-sizes) {
-      @include min(#{bp(nth(nth($container-sizes, $j), 1))}) {
-        max-width: container(#{nth(nth($container-sizes, $j), 1)});
-      }
-    }
+    max-width: $container-max;
+    margin-right: auto;
+    margin-left: auto;
+    padding-right: 15px;
+    padding-left: 15px;
   }
 }
 
-row {
+// Full genişlikli container
+.container-fluid {
+  width: 100%;
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.row {
   display: flex;
   flex-wrap: wrap;
   margin-left: calc(-#{$gutter} / 2);
@@ -333,3 +308,47 @@ $display-utils: (
 }
 
 /*line clamp end*/
+
+$spacing-scale: (
+  0: 0,
+  1: 0.25rem,
+  2: 0.5rem,
+  3: 1rem,
+  4: 1.5rem,
+  5: 3rem,
+  auto: auto,
+);
+@mixin generate-spacing($property, $prefix) {
+  @each $key, $value in $spacing-scale {
+    .#{$prefix}t-#{$key} {
+      #{$property}-top: $value;
+    }
+    .#{$prefix}b-#{$key} {
+      #{$property}-bottom: $value;
+    }
+    .#{$prefix}s-#{$key} {
+      #{$property}-left: $value;
+    }
+    .#{$prefix}e-#{$key} {
+      #{$property}-right: $value;
+    }
+    .#{$prefix}x-#{$key} {
+      #{$property}-left: $value;
+      #{$property}-right: $value;
+    }
+    .#{$prefix}y-#{$key} {
+      #{$property}-top: $value;
+      #{$property}-bottom: $value;
+    }
+    .#{$prefix}-#{$key} {
+      #{$property}: $value;
+    }
+  }
+}
+@include generate-spacing(margin, m);
+@include generate-spacing(padding, p);
+
+
+.h-100{
+  height: 100%;
+}
