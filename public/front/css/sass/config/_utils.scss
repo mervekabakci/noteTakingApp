@@ -3,22 +3,16 @@
 :root {
   --white: #ffffff;
   --black: #000000;
-  --primary: #242424;
-  --secondary: #f3213c;
-  --tertiary: #201e94;
-  --bg-color: #ecf0f5;
-  --text: #383737;
+  --primary: #335cff;
+  --secondary: #525866;
+  --danger: #fb3748;
+  --light-bg: #e5e5e5;
+  --dark-bg: #06090c;
 
-  --gray: #ecf0f5;
-  --gray-100: #e3e6eb;
-  --gray-200: #cecfd1;
-  --gray-300: #bebebe;
-  --gray-400: #b1b0b0;
-  --gray-500: #a09e9e;
-  --gray-600: #929191;
-  --gray-700: #777777;
-  --gray-800: #6b6b6b;
-  --gray-900: #5c5b5b;
+  --gray-100: #f3f5f8;
+  --gray-500: #717784;
+  --gray-600: #525866;
+  --gray-950: #0e121b;
 }
 
 $gutter: 1rem;
@@ -146,7 +140,7 @@ $colors: (
   @return map-get($breakpoints, $bp);
 }
 
-//ekran ölçü aralıklarının tanımlanması
+// Breakpoint ve container genişlikleri
 $breakpoints: (
   xs: 320px,
   sm: 576px,
@@ -158,60 +152,56 @@ $breakpoints: (
   big: 1920px,
 );
 
-@function container($container-size, $true-val: false) {
-  @return map-get($container-sizes, $container-size);
-}
-
-$container-sizes: (
-  xs: map-get($breakpoints, xs),
-  sm: map-get($breakpoints, sm),
-  md: map-get($breakpoints, md),
-  lg: map-get($breakpoints, lg),
-  xl: map-get($breakpoints, xl),
-  xxl: map-get($breakpoints, xxl),
-  xxxl: map-get($breakpoints, xxxl),
-  big: map-get($breakpoints, big),
+// Her breakpoint için container max-width değerleri
+$container-max-widths: (
+  xs: 284px,
+  sm: 540px,
+  md: 960,
+  lg: 1140px,
+  xl: 1320px,
+  xxl: 1440px,
+  xxxl: 1640px,
+  big: 1860px,
 );
 
+// Ana .container sınıfı (responsive)
 .container {
-  padding-left: 1rem;
+  width: 100%;
   padding-right: 1rem;
+  padding-left: 1rem;
+  margin-right: auto;
+  margin-left: auto;
 
-  &:not(.is-fluid) {
-    margin: 0 auto;
-
-    @each $bp, $container-size in $container-sizes {
-      @include min(#{bp(#{$bp})}) {
-        width: 100%;
-        max-width: container(#{$bp});
-      }
+  // Her breakpoint'e göre max-width
+  @each $breakpoint, $container-max in $container-max-widths {
+    @media (min-width: map-get($breakpoints, $breakpoint)) {
+      max-width: $container-max;
     }
   }
 }
 
-@each $bp, $container-size in $container-sizes {
-  .container-#{$bp} {
-    margin: 0 auto;
-    padding-right: 30px;
-    padding-left: 30px;
+// Sabit genişlikli .container-{breakpoint} sınıfları
+@each $breakpoint, $container-max in $container-max-widths {
+  .container-#{$breakpoint} {
     width: 100%;
-
-    @media screen and (max-width: 991.98px) {
-      padding-left: 16px;
-      padding-right: 16px;
-    }
-
-    $i: index($container-sizes, $bp $container-size);
-
-    @for $j from $i through length($container-sizes) {
-      @include min(#{bp(nth(nth($container-sizes, $j), 1))}) {
-        max-width: container(#{nth(nth($container-sizes, $j), 1)});
-      }
-    }
+    max-width: $container-max;
+    margin-right: auto;
+    margin-left: auto;
+    padding-right: 1rem;
+    padding-left: 1rem;
   }
 }
 
-row {
+// Full genişlikli container
+.container-fluid {
+  width: 100%;
+  padding-right: 1rem;
+  padding-left: 1rem;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.row {
   display: flex;
   flex-wrap: wrap;
   margin-left: calc(-#{$gutter} / 2);

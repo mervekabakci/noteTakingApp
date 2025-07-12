@@ -7,6 +7,7 @@ import SignUpPageApp from './pages/auth/signUp';
 import ForgetPasswordPageApp from './pages/auth/forgetPassword';
 import ResetPasswordPageApp from './pages/auth/resetPassword';
 import DialogApp from './DialogApp';
+import Home from './pages/home';
 
 export default function App() {
   const [count, setCount] = useState(0);
@@ -31,7 +32,7 @@ export default function App() {
     <>
 
   
-      <DialogApp />
+      
 
       <Router>
       <Routes>
@@ -39,6 +40,7 @@ export default function App() {
         <Route path="/signup" element={<SignUpPageApp />} />
         <Route path="/forgot" element={<ForgetPasswordPageApp />} />
         <Route path="/reset" element={<ResetPasswordPageApp />} />
+        {/* <Route index element={<Home />} /> */}
       </Routes>
     </Router>
 
