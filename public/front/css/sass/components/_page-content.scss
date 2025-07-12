@@ -1,0 +1,38 @@
+$noteListWidth: 290px;
+$noteRightColWidth: 258px;
+.pageContent {
+  width: calc(100% - $sidebarWidth);
+
+  .pageHeader {
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid var(--gray-200);
+    .pageRightColumn {
+      margin-left: auto;
+      display: flex;
+      align-items: center;
+    }
+  }
+  .pageBody {
+    display: flex;
+
+    .noteListWrapper {
+      width: $noteListWidth;
+    }
+    .noteDetailsWrapper {
+      flex: 1;
+      display: flex;
+      border-left: 1px solid var(--gray-200);
+
+      .noteDetailsContent {
+        flex: 1;
+      }
+      .noteRightColumn {
+        width: $noteRightColWidth;
+        display: flex;
+        flex-direction: column;
+        border-left: 1px solid var(--gray-200);
+      }
+    }
+  }
+}

@@ -30,17 +30,13 @@ export default function App() {
   }
   return(
     <>
-
-  
-      
-
-      <Router>
+    <Router>
       <Routes>
         <Route path="/" element={<LoginApp />} />
         <Route path="/signup" element={<SignUpPageApp />} />
         <Route path="/forgot" element={<ForgetPasswordPageApp />} />
         <Route path="/reset" element={<ResetPasswordPageApp />} />
-        {/* <Route index element={<Home />} /> */}
+        <Route index element={<Home />} />
       </Routes>
     </Router>
 

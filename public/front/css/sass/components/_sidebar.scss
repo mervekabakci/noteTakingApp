@@ -1,3 +1,24 @@
-.sidebar{
-    width: 272px;
+$sidebarWidth:272px;
+
+.sidebarWrapper{
+    width: $sidebarWidth;
+    padding-top:15px;
+    padding-bottom: 15px;
+    border-right: 1px solid var(--gray-200);
+
+    .sidebar{
+        .sideBarMenu{
+            display: flex;
+            flex-direction: column;
+        }
+    }
+    .tagWrapper{
+        .title{
+
+        }
+        .tagList{
+            display: flex;
+            flex-direction: column;
+        }
+    }
 }
