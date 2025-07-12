@@ -1,23 +1,15 @@
+import Auth from "."
+import Logo from "../../components/Logo"
 
 
-export default function SignUpPageApp() {
+export default function SignUp() {
 
   return (
-    <>
-      <SignUp />
-    </>
-  )
-}
-
-function SignUp() {
-  return (
-    <>
-      <div className="login-container">
-      <div className="login-card">
-        <div className="logo">🖊️ <span>Notes</span></div>
-        <h2>Create Your Account</h2>
-        <p className="subtitle">Sign up to start organizing your notes and boost your productivity.</p>
-
+      <>
+      <Auth
+        formTitle="Create Your Account"
+        subTitle="Sign up to start organizing your notes and boost your productivity."
+      >
         <form>
           <label>Email Address</label>
           <input type="email" placeholder="email@example.com" />
@@ -42,10 +34,7 @@ function SignUp() {
         <hr />
 
         <p className="signup-text">Already have an account?<a href="/">Login</a></p>
-
-    
-      </div>
-    </div>
+      </Auth>
     </>
   )
 }
