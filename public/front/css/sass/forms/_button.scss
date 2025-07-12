@@ -19,26 +19,6 @@ button {
   z-index: 1;
   overflow: hidden;
   gap: 10px;
-  &:not(.disabled) {
-    &:after {
-      content: "";
-      position: absolute;
-      width: 0;
-      height: 100%;
-      left: 0;
-      top: 0;
-      transition: width 0.3s;
-      z-index: -1;
-    }
-    @media screen and (min-width: 992px) {
-      &:hover {
-        &:after {
-          width: 100%;
-        }
-      }
-    }
-  }
-
   &.disabled{
     pointer-events: none;
     filter: grayscale(1);
