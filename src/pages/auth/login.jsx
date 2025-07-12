@@ -1,24 +1,15 @@
 
 import { Link } from 'react-router-dom';
+import Auth from '.';
 
-export default function LoginApp() {
+export default function Login() {
 
   return (
     <>
-      <Login />
-    </>
-  )
-}
-
-function Login() {
-  return (
-    <>
-      <div className="login-container">
-      <div className="login-card">
-        <div className="logo">🖊️ <span>Notes</span></div>
-        <h2>Welcome to Note</h2>
-        <p className="subtitle">Please log in to continue</p>
-
+      <Auth
+        formTitle="Welcome to Note"
+        subTitle="Please log in to continue"
+      >
         <form>
           <label>Email Address</label>
           <input type="email" placeholder="email@example.com" />
@@ -43,8 +34,7 @@ function Login() {
         <hr />
 
         <p className="signup-text">No account yet? <Link to="/signup">Sign Up</Link></p>
-      </div>
-    </div>
+      </Auth>
     </>
   )
 }
