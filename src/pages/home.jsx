@@ -15,7 +15,7 @@ export default function Home(){
                             </div>
                             <div className="pageRightColumn">
                                 <div className="searchWrapper">
-                                    <span class="icon-Search"></span>
+                                    <span className="icon-Search"></span>
                                     <input type="text" placeholder="Search by title, content or tags..." />
                                 </div>
                                 <a href="#" className="settingsButton"><span className="icon-Setting"></span></a>
@@ -90,11 +90,11 @@ export default function Home(){
                                     <h2>React Performance Optimization</h2>
                                     <div className="info">
                                         <div className="item">
-                                            <div className="title"><span class="icon-Tag"></span><span>Tags</span></div>
+                                            <div className="title"><span className="icon-Tag"></span><span>Tags</span></div>
                                             <div className="tags">Dev, React</div>
                                         </div>
                                         <div className="item">
-                                            <div className="title"><span class="icon-CircleClock"></span><span>Last edited</span></div>
+                                            <div className="title"><span className="icon-CircleClock"></span><span>Last edited</span></div>
                                             <div className="date">29 Oct 2024</div>
                                         </div>
                                     </div>
