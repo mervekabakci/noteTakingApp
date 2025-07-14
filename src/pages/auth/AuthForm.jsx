@@ -1,148 +1,136 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import PasswordInput from "./PasswordInput";
 
 export default function AuthForm({ mode }) {
-  const [userToken, setUserToken] = useState(null);
   const navigate = useNavigate();
+  const successDialogRef = useRef(null);
 
-  const isLogin = mode === "login";
-  const isRegister = mode === "register";
-  const isForgot = mode === "forgot";
-  const isReset = mode === "reset";
+  const [isDialogSuccess, setDialogSuccess] = useState(true);
+  const [dialogMessage, setDialogMessage] = useState('Kayıt Başarılı');
+  const [dialogMessageText, setDialogMessageText] = useState('Kaydınız başarıyla alındı. Giriş yapabilirsiniz.');
+
+  const [user, setUser] = useState(null);
+  const [userToken, setUserToken] = useState(null);
+
+  const isLoginService = mode === "login";
+  const isRegisterService = mode === "register";
+  const isForgotService = mode === "forgot";
+  const isResetService = mode === "reset";
 
   const baseUrl = "https://notes.muratakdemir.tr/Auth";
   const fetchUrl = `${baseUrl}/${mode}`;
-
+  if(isRegisterService){
+      console.log("isRegisterService");
+      console.log(fetchUrl)
+  }
+  if(isLoginService){
+      console.log("isLoginService");
+  }
+  if(isForgotService){
+      console.log("isForgotService");
+  }
+  if(isResetService){
+      console.log("isResetService");
+  }
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     const formData = new FormData(e.target);
     const formObj = Object.fromEntries(formData);
+    console.log(formObj)
+    const req = await fetch(fetchUrl,
+    {
+      method:'POST',
+      headers:{
+        'Content-Type': 'Application/json'
+      },
+      body:JSON.stringify(formObj)
+    });
 
-    try {
-      const response = await fetch(fetchUrl, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formObj),
-      });
+    if(isRegisterService){
+      if(!req.ok){
+        const errorData = await req.json();
+        console.log("Error response:", errorData.message);
+        const duplicateError = errorData?.errors?.DuplicateUserName?.[0];
 
-      const data = await response.json();
-      console.log("Login yanıtı:", data);
+        setDialogSuccess(false);
 
-      if (!response.ok) {
-          if (response.status === 401) {
-            if (data.title === "Unauthorized" && data.detail === "Failed") {
-              alert("Bu e-posta adresi kayıtlı değil veya şifre yanlış.");
-              return;
-            }
-          }
-
-        if (data.title?.includes("DuplicateUserName")) {
-          alert("Bu e-posta zaten kayıtlı. Lütfen giriş yapın.");
-          navigate("/login");
-          return;
+        if(duplicateError){
+          setDialogSuccess(true);
+          setDialogMessage('Kayıt Yapılamadı!')
+          setDialogMessageText('Bu kullanıcı daha önce kayıt oldu. Giriş yapmak için Login butonuna tıklayınız.')
+        }else{
+          setDialogSuccess(false);
+          setDialogMessage('Kayıt Yapılamadı!')
+          setDialogMessageText("Bir hata oluştu. Lütfen tekrar deneyiniz.")
         }
 
-        if (data.errors) {
-          const errorMessages = Object.entries(data.errors)
-            .map(([key, val]) => `${key}: ${val.join(", ")}`)
-            .join("\n");
-          alert("Validasyon Hataları:\n" + errorMessages);
-        } else {
-          alert("Hata: " + (data.title || response.status));
-        }
+        successDialogRef.current.showModal();
         return;
       }
 
-      if (isLogin || isRegister) {
-        localStorage.setItem("userToken", userToken);
-        setUserToken(data);
-
-        const reqHeaders = {
-            Authorization: `Bearer ${userToken.accessToken}`,
-        }
-        
-        const reqDetails = {
-          method: "GET",
-          headers:reqHeaders
-        }
-        const infoResponse = await fetch(`${baseUrl}/manage/info`, reqDetails).then(res => res.json());
-        console.log(infoResponse)
-
-        if (!infoResponse.ok) {
-          const infoError = await infoResponse.json();
-          localStorage.removeItem("userToken");
-
-          if (infoError.title?.includes("Unauthorized")) {
-            alert("Kullanıcı bulunamadı. Lütfen kayıt olun.");
-            navigate("/signup");
-          } else {
-            alert("Giriş doğrulaması başarısız.");
-          }
-          return;
-        }
-
-        const userInfo = await infoResponse.json();
-        console.log("Kullanıcı bilgisi:", userInfo);
-        alert("Başarılı giriş / kayıt!");
-        navigate("/");
-        return;
-      }
-
-      if (isForgot) alert("Şifre yenileme bağlantısı gönderildi.");
-      if (isReset) alert("Şifre başarıyla yenilendi.");
-      
-    } catch (err) {
-      alert("Bir hata oluştu: " + err.message);
+      setDialogMessage("Kayıt Başarılı!");
+      setDialogMessageText("Kaydınız başarıyla alındı. Giriş yapabilirsiniz.");
+      setDialogSuccess(true);
+      successDialogRef.current.showModal();
+    }
+    if(isLoginService){
+      setUserToken(await req.json());
+      localStorage.userToken = JSON.stringify(userToken);
+      navigate("/");
     }
   };
+  function goToLogin() {
+    successDialogRef.current.close();
+    if (isDialogSuccess) {
+      navigate("/login");
+    }
+  }
   return (
     <>
         <form onSubmit={handleSubmit}>
-        {(isLogin || isRegister || isForgot) && (
-            <>
-              <div className="inputColumn">
-                <label>Email Address</label>
-                <input type="email" name="email" placeholder="email@example.com" required/>
-              </div>
-            </>
-        )}
-
-        {(isLogin || isRegister || isReset) && (
-            <>
-              <div className="inputColumn">
-                <div className="password-label">
-                    <label>Password</label>
-                    {isLogin && 
-                        <Link to="/forgot" className='forgot'>Forgot</Link>
-                    }
+          {(isLoginService || isRegisterService || isForgotService) && (
+              <>
+                <div className="inputColumn">
+                  <label>Email Address</label>
+                  <input type="email" name="email" placeholder="email@example.com" required/>
                 </div>
-                <PasswordInput name="password" />
-                {(isReset || isRegister) &&  <div className="valid-message"><span className="icon-info"></span><span>At least 8 characters</span></div>}
+              </>
+          )}
+
+          {(isLoginService || isRegisterService || isResetService) && (
+              <>
+                <div className="inputColumn">
+                  <div className="password-label">
+                      <label>Password</label>
+                      {isLoginService && 
+                          <Link to="/forgot" className='forgot'>Forgot</Link>
+                      }
+                  </div>
+                  <PasswordInput name="password" />
+                  {(isResetService || isRegisterService) &&  <div className="valid-message"><span className="icon-info"></span><span>At least 8 characters</span></div>}
+                </div>
+              </>
+          )}
+
+          {isResetService && (
+              <>
+              <div className="inputColumn">
+                <label>Confirm New Password</label>
+                <PasswordInput name="confirmPassword" />
               </div>
-            </>
-        )}
+              </>
+          )}
 
-        {isReset && (
-            <>
-            <div className="inputColumn">
-              <label>Confirm New Password</label>
-              <PasswordInput name="confirmPassword" />
-            </div>
-            </>
-        )}
-
-        <button className="login-button" type="submit">
-            {isLogin && "Login"}
-            {isRegister && "Sign Up"}
-            {isForgot && "Send Reset Link"}
-            {isReset && "Reset Password"}
-        </button>
+          <button className="login-button" type="submit">
+              {isLoginService && "Login"}
+              {isRegisterService && "Sign Up"}
+              {isForgotService && "Send Reset Link"}
+              {isResetService && "Reset Password"}
+          </button>
         </form>
-        {(isLogin || isRegister) && (
+        {(isLoginService || isRegisterService) && (
             <>
                 <hr />
                 <div><span className="subtitle">Or log in with:</span></div>
@@ -153,9 +141,21 @@ export default function AuthForm({ mode }) {
                 <hr />
             </>
         )}
-        {isLogin && <p className="signup-text">No account yet? <Link to="/signup" >Sign Up</Link></p>}
-        {isRegister && <p className="signup-text">Already have an account? <Link to="/login" >Login</Link></p>}
+        {isLoginService && <p className="signup-text">No account yet? <Link to="/signup" >Sign Up</Link></p>}
+        {isRegisterService && <p className="signup-text">Already have an account? <Link to="/login" >Login</Link></p>}
 
+        <dialog ref={successDialogRef}>
+          <div className="dialogHead">
+            {dialogMessage}
+            <button className="closeBtn" onClick={() => successDialogRef.current.close()}>×</button>
+          </div>
+          <div className="dialogBody">
+            <p className="succesText">{dialogMessageText}</p>
+            <div className="dialogActions">
+              <button className={`${isDialogSuccess ? "confirmBtn button-primary"  : "cancelBtn"}`} onClick={goToLogin}>{isDialogSuccess ? "Login" : "Close"}</button>
+            </div>
+          </div>
+        </dialog>
     </>
   );
 }
