@@ -1,8 +1,12 @@
-import { useRef, useState } from "react";
+import { useContext, useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import PasswordInput from "./PasswordInput";
+import { AuthContext } from "./AuthContext";
 
 export default function AuthForm({ mode }) {
+
+  const { user, setUser } = useContext(AuthContext);
+
   const navigate = useNavigate();
   const successDialogRef = useRef(null);
 
@@ -10,7 +14,6 @@ export default function AuthForm({ mode }) {
   const [dialogMessage, setDialogMessage] = useState('Kayıt Başarılı');
   const [dialogMessageText, setDialogMessageText] = useState('Kaydınız başarıyla alındı. Giriş yapabilirsiniz.');
 
-  const [user, setUser] = useState(null);
   const [userToken, setUserToken] = useState(null);
 
   const isLoginService = mode === "login";
@@ -39,7 +42,7 @@ export default function AuthForm({ mode }) {
     const formData = new FormData(e.target);
     const formObj = Object.fromEntries(formData);
     console.log(formObj)
-    const req = await fetch(fetchUrl,
+    const newUser = await fetch(fetchUrl,
     {
       method:'POST',
       headers:{
@@ -47,11 +50,13 @@ export default function AuthForm({ mode }) {
       },
       body:JSON.stringify(formObj)
     });
+    // setUser([newUser, ...user]);
+    const responseText = await newUser.text();
+    const userData = responseText ? JSON.parse(responseText) : {};
 
     if(isRegisterService){
-      if(!req.ok){
-        const errorData = await req.json();
-        console.log("Error response:", errorData.message);
+      if(!newUser.ok){
+        console.log("Error response:", userData.message);
         const duplicateError = errorData?.errors?.DuplicateUserName?.[0];
 
         setDialogSuccess(false);
@@ -76,8 +81,18 @@ export default function AuthForm({ mode }) {
       successDialogRef.current.showModal();
     }
     if(isLoginService){
-      setUserToken(await req.json());
-      localStorage.userToken = JSON.stringify(userToken);
+      // setUserToken(await newUser.json());
+      // localStorage.userToken = JSON.stringify(userToken);
+       if (!newUser.ok) {
+        console.log("Login failed:", newUser.message);
+        setDialogSuccess(false);
+        setDialogMessage("Giriş Başarısız!");
+        setDialogMessageText("Email veya şifrenizi kontrol edin.");
+        successDialogRef.current.showModal();
+        return;
+      }
+
+      setUser(userData);
       navigate("/");
     }
   };
@@ -89,7 +104,7 @@ export default function AuthForm({ mode }) {
   }
   return (
     <>
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} autoComplete="false">
           {(isLoginService || isRegisterService || isForgotService) && (
               <>
                 <div className="inputColumn">

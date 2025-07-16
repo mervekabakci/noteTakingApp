@@ -1,6 +1,6 @@
 import './App.css'
 import { useRef, useState } from 'react';
-import { BrowserRouter as Router,Routes,Route } from 'react-router-dom';
+import { BrowserRouter as Router,Routes,Route, Navigate } from 'react-router-dom';
 
 import LoginApp from './pages/auth/login'
 import SignUpPageApp from './pages/auth/signUp';
@@ -8,40 +8,31 @@ import ForgetPasswordPageApp from './pages/auth/forgetPassword';
 import ResetPasswordPageApp from './pages/auth/resetPassword';
 import DialogApp from './DialogApp';
 import Home from './pages/home';
-import ProtectedRoute from './components/ProtectedRoute';
+import { AuthContext } from './pages/auth/AuthContext';
+
+const stored = JSON.parse(localStorage.user || '{}');
 
 export default function App() {
-  const [count, setCount] = useState(0);
-  const otherCount = useRef(0);
+  const [user, setUser] = useState(stored.user || null);
 
-  function handleClick() {
-    setCount(count + 1);
-  }
-
-  function handleOtherClick() {
-    if (otherCount.current >= 10) {
-      alert('Çok tıkladın yeter');
-      return;
-    }
-  
-
-    otherCount.current++;
-    console.log(otherCount.current);
-  
+  const updateUSer = (userData) => {
+    const updated = { user:userData};
+    setUser(userData);
+    localStorage.user = JSON.stringify(updated);
   }
   return(
     <>
-    <Router>
-      <Routes>
-        <Route path="/login" element={<LoginApp />} />
-        <Route path="/signup" element={<SignUpPageApp />} />
-        <Route path="/forgot" element={<ForgetPasswordPageApp />} />
-        <Route path="/reset" element={<ResetPasswordPageApp />} />
-        {/* <Route index element={<Home />} /> */}
-         <Route path="/" element={<ProtectedRoute><Home /></ProtectedRoute>}/>
-      </Routes>
-    </Router>
-
+      <AuthContext.Provider value={{ user, setUser:updateUSer }}>
+        <Router>
+          <Routes>
+            <Route path="/login" element={!user ? <LoginApp /> : <Navigate to="/" />} />
+            <Route path="/signup" element={<SignUpPageApp />} />
+            <Route path="/forgot" element={<ForgetPasswordPageApp />} />
+            <Route path="/reset" element={<ResetPasswordPageApp />} />
+            <Route index element={user ? <Home /> : <Navigate to="/login" />} />
+          </Routes>
+        </Router>
+      </AuthContext.Provider>
     </>
   )
 }
