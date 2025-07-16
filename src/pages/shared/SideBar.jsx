@@ -2,6 +2,18 @@ import { Link } from "react-router-dom";
 import Logo from "../../components/Logo";
 
 export default function SideBar(){
+
+    // const fetchUrl = 'https://notes.muratakdemir.tr/Note/{id}';
+
+    // const req = await fetch(fetchUrl,
+    // {
+    //   method:'GET',
+    //   headers:{
+    //     'Content-Type': 'Application/json'
+    //   },
+    //   body:JSON.stringify(formObj)
+    // });
+
     return(
         <div className="sidebarWrapper">
             <div className="sidebar-top">
